@@ -1,7 +1,5 @@
 from django.db import models
-from django.apps import apps
-# OtherBanks = apps.get_model('bank_accounts', 'OtherBanks')
-# from bank_accounts.models import *
+from rest_framework import  serializers
 from passlib.hash import pbkdf2_sha256
 # Create your models here.
 
@@ -21,6 +19,14 @@ class Users(models.Model):
 
     class Meta:
         verbose_name_plural = "Users"
+
+
+class UserSerializer(serializers.Serializer):
+    username = serializers.CharField(max_length=256)
+    fullname = serializers.CharField(max_length=256)
+    email = serializers.CharField(max_length=256)
+    user_status = serializers.BooleanField()
+
 
 class OtherBankUserInfo(models.Model):
     guest_user_id = models.BigAutoField(primary_key=True)
