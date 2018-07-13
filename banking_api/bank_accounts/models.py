@@ -1,5 +1,6 @@
 from django.db import models
-from django.apps import apps
+from rest_framework import  serializers
+# from django.apps import apps
 # Users = apps.get_model('bank_users', 'Users')
 # from bank_users.models import *
 # from banking_api.bank_users.models import Users
@@ -26,13 +27,19 @@ class BankBranch(models.Model):
         )
         try:
             account.save()
-            return account.account_no
+            return account
         except Exception as err:
             print("failed to create account: {0}".format(err))
-            return -1
+            return None
 
     class Meta:
         verbose_name_plural = "BankBranch"
+
+
+class BankBranchSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BankBranch
+        fields = ["branch_code", "branch_name"]
 
 
 class OtherBanks(models.Model):
@@ -54,6 +61,15 @@ class BankAccounts(models.Model):
 
     def get_balance(self):
         return self.amount
+
+
+class BankAccountSerializer(serializers.ModelSerializer):
+    branch_code = BankBranchSerializer(read_only=True)
+    class Meta:
+        model = BankAccounts
+        fields = ["account_no", "bank_branch", "amount", "branch_code"]
+        depth = 1
+
 
 class AccontNumberGenerator(models.Model):
     id = models.BigAutoField(primary_key=True)
