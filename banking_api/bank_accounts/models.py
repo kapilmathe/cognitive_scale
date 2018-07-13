@@ -62,6 +62,17 @@ class BankAccounts(models.Model):
     def get_balance(self):
         return self.amount
 
+    def get_balance_forecast(self, interest=4.0):
+        pa =self.get_balance()
+        pa = float(pa)
+        result = []
+        for i in range(6):
+            print(pa)
+            pa = (pa*(interest/100.0) + pa)
+            result.append((pa))
+        print(result)
+        return result
+
 
 class BankAccountSerializer(serializers.ModelSerializer):
     branch_code = BankBranchSerializer(read_only=True)

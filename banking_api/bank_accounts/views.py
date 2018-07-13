@@ -60,12 +60,24 @@ def get_bank_accounts(request):
 @api_view(['GET'])
 def get_balance(request, account_no):
     out = {'success': True, 'data': None}
-    account_no = account_no # request.data.get('account_no')
     try:
         account = BankAccounts.objects.get(account_no=account_no)
         out['data'] = {'balance': account.get_balance()}
         return Response(out, status.HTTP_200_OK)
     except Exception as err:
         logger.error("failed to get balance:{0]".format(err))
+        out['success'] = False
+        return Response(out, status.HTTP_503_SERVICE_UNAVAILABLE)
+
+
+@api_view(['GET'])
+def future_balance(request, account_no):
+    out = {'success': True, 'data': None}
+    try:
+        account = BankAccounts.objects.get(account_no=account_no)
+        out['data'] = {'forecast':  account.get_balance_forecast()}
+        return Response(out, status.HTTP_200_OK)
+    except Exception as err:
+        logger.error("failed to get balance forecast:{0]".format(err))
         out['success'] = False
         return Response(out, status.HTTP_503_SERVICE_UNAVAILABLE)

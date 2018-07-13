@@ -88,7 +88,7 @@
 
 -   Calculate balance for user account for future date, given base interest rate of 4%
     -   Assumption:
-        > next 6 months prediction
+        > next 6 years prediction
 
     -   required information:
         > current balance
