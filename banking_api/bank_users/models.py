@@ -17,6 +17,10 @@ class Users(models.Model):
     def set_user_status(self, status):
         self.user_status = status
 
+    def __str__(self):
+        return "{0}-{1}".format(self.username, self.fullname)
+
+
     class Meta:
         verbose_name_plural = "Users"
 
@@ -28,20 +32,19 @@ class UserSerializer(serializers.Serializer):
     user_status = serializers.BooleanField()
 
 
-class OtherBankUserInfo(models.Model):
-    guest_user_id = models.BigAutoField(primary_key=True)
-    guest_fullname = models.CharField(max_length=256)
-    other_bank_id = models.ForeignKey('bank_accounts.OtherBanks', on_delete=models.CASCADE)
-    other_bank_account_no = models.CharField(max_length=13, unique=True, db_index=True)
-
-
 class UserBeneficiaries(models.Model):
     id = models.BigAutoField(primary_key=True)
     user_id = models.ForeignKey(Users, on_delete=models.CASCADE)
-    beneficiary_id= models.BigIntegerField()
+    # beneficiary_id= models.BigIntegerField()
     nickname = models.CharField(max_length=10)
-    beneficiary_account_no = models.CharField(max_length=13, unique=True, db_index=True)
+    beneficiary_account_no = models.CharField(max_length=13, db_index=True)
     beneficiary_fullname = models.CharField(max_length=256)
+    other_bank_id = models.ForeignKey('bank_accounts.OtherBanks', on_delete=models.CASCADE, null=True)
     is_guest = models.BooleanField()
 
 
+class UserBeneficiariesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserBeneficiaries
+        fields = '__all__'
+        depth = 1

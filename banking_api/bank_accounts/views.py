@@ -5,7 +5,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 import json
-from .models import BankBranch, BankAccounts, BankAccountSerializer
+from .models import BankBranch, BankAccounts, BankAccountSerializer, OtherBanks, OtherBanksSerializer
 from bank_users.models import Users
 
 
@@ -81,3 +81,23 @@ def future_balance(request, account_no):
         logger.error("failed to get balance forecast:{0]".format(err))
         out['success'] = False
         return Response(out, status.HTTP_503_SERVICE_UNAVAILABLE)
+
+
+@api_view(['GET'])
+def get_other_bank_branch(request, branch_code):
+    out = {'success': True, 'other_bank': None}
+    try:
+        print(branch_code)
+        other_bank = OtherBanks.objects.filter(bank_branch_code =branch_code).first()
+        if other_bank:
+            out['other_bank'] = OtherBanksSerializer(other_bank).data
+            print(out)
+            return Response(out, status.HTTP_200_OK)
+        else:
+            out['success'] = False
+            return Response(out, status.HTTP_404_NOT_FOUND)
+    except Exception as err:
+        logger.error("failed to get other branch:{0}".format(err))
+        out['success'] = False
+        return Response(out, status.HTTP_503_SERVICE_UNAVAILABLE)
+

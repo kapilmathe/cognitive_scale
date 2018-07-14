@@ -35,6 +35,9 @@ class BankBranch(models.Model):
     class Meta:
         verbose_name_plural = "BankBranch"
 
+    def __str__(self):
+        return self.branch_code
+
 
 class BankBranchSerializer(serializers.ModelSerializer):
     class Meta:
@@ -50,6 +53,13 @@ class OtherBanks(models.Model):
 
     class Meta:
         verbose_name_plural = "OtherBanks"
+
+
+class OtherBanksSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OtherBanks
+        fields = '__all__'
+
 
 
 class BankAccounts(models.Model):
