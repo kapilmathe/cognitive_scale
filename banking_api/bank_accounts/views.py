@@ -1,10 +1,7 @@
 import logging
-from django.shortcuts import render
-from django.core import serializers
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-import json
 from .models import BankBranch, BankAccounts, BankAccountSerializer, OtherBanks, OtherBanksSerializer
 from bank_users.models import Users
 

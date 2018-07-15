@@ -4,6 +4,7 @@ from rest_framework import  serializers
 # Users = apps.get_model('bank_users', 'Users')
 # from bank_users.models import *
 # from banking_api.bank_users.models import Users
+from decimal import Decimal
 
 # Create your models here.
 class BankBranch(models.Model):
@@ -83,6 +84,16 @@ class BankAccounts(models.Model):
         print(result)
         return result
 
+    def add_amount(self, amount):
+        self.amount += Decimal(amount)
+
+    def reduce_amount(self, amount):
+        self.amount -= Decimal(amount)
+        if self.amount < 0.0:
+            self.amount += Decimal(amount)
+            return False
+        else:
+            return True
 
 class BankAccountSerializer(serializers.ModelSerializer):
     branch_code = BankBranchSerializer(read_only=True)

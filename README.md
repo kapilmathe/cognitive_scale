@@ -87,7 +87,7 @@
                      
     -   required information:
     
-        > beneficiary_id
+        > beneficiary_account_no
 
         > amount
 

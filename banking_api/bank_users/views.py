@@ -1,13 +1,9 @@
 import logging
-from django.shortcuts import render
-from django.core import serializers
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-import json
 from .models import Users, UserSerializer, UserBeneficiaries
 from passlib.hash import pbkdf2_sha256
-import requests as req
 from bank_accounts.models import OtherBanks, BankAccounts
 
 

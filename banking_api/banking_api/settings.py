@@ -68,7 +68,6 @@ INSTALLED_APPS = [
     'bank_users',
     'bank_accounts',
     'bank_transactions',
-    'schedule'
 ]
 
 MIDDLEWARE = [

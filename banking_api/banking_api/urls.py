@@ -17,10 +17,12 @@ from django.contrib import admin
 from django.conf.urls import url, include
 from bank_users import urls as bank_user_urls
 from bank_accounts import urls as bank_accounts_urls
+from bank_transactions import urls as bank_transactions_urls
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^bank_users/', include(bank_user_urls)),
     url(r'^bank_accounts/', include(bank_accounts_urls)),
+    url(r'^bank_transactions/', include(bank_transactions_urls))
 
 ]
