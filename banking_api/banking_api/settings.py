@@ -11,9 +11,36 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+import json
+from pymongo import MongoClient
 
+# mongodburl = r'mongodb://myuser:@Bcd1234@ds137581.mlab.com:37581/cognitive_sclale'
+
+# /home/kmathe/codes/cognitive_scale/banking_api/db.sqlite3
+# /home/kmathe/codes/cognitive_scale/banking_api/config/dbconf.json
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+
+
+def read_json_config(confname):
+    confpath = os.path.join(BASE_DIR, 'config', confname)
+    with open(confpath, 'r') as f:
+        return json.load(f)
+
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+connection_param = read_json_config('dbconf.json')
+
+connection = MongoClient(
+    'mongodb://{user}:{password}@{host}:'
+    '{port}/{namespace}'.format(**connection_param)
+)
+
+db = connection.cognitive_scale
+
+dbconf = db.dbconfiguration
+
+conf_params = dbconf.find_one({'PK':1})
 
 
 # Quick-start development settings - unsuitable for production
@@ -77,12 +104,11 @@ WSGI_APPLICATION = 'banking_api.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
+dbconf = read_json_config('dbconf.json')
+
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    'default': conf_params
 }
 
 

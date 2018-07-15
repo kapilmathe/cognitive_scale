@@ -1,0 +1,7 @@
+{
+    "user": "myuser",
+    "password": "myuser1234",
+    "host": "ds137581.mlab.com",
+    "port": 37581,
+    "namespace": "cognitive_scale"
+}

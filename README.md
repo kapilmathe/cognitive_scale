@@ -4,6 +4,7 @@
     -   Assumptions:
         > client already created bu "create_user" api call with proper username, password and email_id
         
+
     -   required information:
         > branch_code.
 
