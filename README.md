@@ -1,42 +1,48 @@
 # Cognitive Scale: Bank web Service
 > Specification for REST API endpoing
--   Create user (create_user)
+-   Create user account (create_account)
+    -   Assumptions:
+        > client already created bu "create_user" api call with proper username, password and email_id
+        
     -   required information:
-        > username.
+        > branch_code.
 
-        > password.
+        > client_id.
 
-        > email_address.
+        > initial_amount.
 
     -   workflow for creating user:
         > accept information and validate input received.
 
-        > create user entry in user database with verification_status as False. generate token with expirition.
-
-        > send email for verification with confimation link build using token.
+        > create account under provided branch and return account_number generated.
 
         > send api response stating:
-          - User created (please verify the email) with (ok :200)*.
-          - If any exception occur: send appropriate failure message.
+          - Account created  with (CREATED :201)*.
+          - If any exception occur: send appropriate failure message with status code (400 BAD REQUEST).
 
 
 -   Get Balance info & Transaction Summary
     -   required information:
         > user_id
+        
+        > account_number 
 
     -   workflow for getting balance and tx summary:
         > if user authenticated:
 
-            > use user_id to get balance.
-            > use user_id to get last 10 transaction
-            > send acquired information (json serialized)  as api response.
+            > use account_no to get balance.
+            > use account_no to get last 10 transaction
+            > send acquired information (json serialized)  as api response with status code (OK: 200).
 
         > if user not authenticated or any exception:
 
             > send out appropriate failure response
 
 
--   Add Beneficiary
+-   Add Beneficiary:
+    -   Assumptions:
+        > there is some way to validate the IFSC code in atual banking system, but here I used local bank list to validate it.
+        
     -   required information
         > beneficiary name
 
@@ -64,9 +70,22 @@
 
 -   Transfer funds instant and schedule for given date and time
     -   Assumptions:
-        > fund amount validation already completed at client app side(for instant transfer)
-
+        > Major assumption for the scope of this iteration: Considering no concurrency race condtion
+        
+        > code simply implemented without handling Critical Section Problem
+        
+        > Possible solution uses following logic:
+        
+            > FIFO logic: first come first serve transaction request.
+            
+            > Using any message queue will suffice.
+            
+            > Higher traffic: 
+            > Have multiple consumers(workers) which consume transaction request.
+            > Have dedicated worker for high transaction rate account.  
+                     
     -   required information:
+    
         > beneficiary_id
 
         > amount

@@ -32,10 +32,10 @@ class UserSerializer(serializers.Serializer):
     user_status = serializers.BooleanField()
 
 
+# this model can be moved to bank_accounts module.
 class UserBeneficiaries(models.Model):
     id = models.BigAutoField(primary_key=True)
     user_id = models.ForeignKey(Users, on_delete=models.CASCADE)
-    # beneficiary_id= models.BigIntegerField()
     nickname = models.CharField(max_length=10)
     beneficiary_account_no = models.CharField(max_length=13, db_index=True)
     beneficiary_fullname = models.CharField(max_length=256)
