@@ -1,0 +1,384 @@
+{
+	"info": {
+		"_postman_id": "fe8919ef-fe18-4062-aeec-fe71fb35971e",
+		"name": "banking_api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "bank_users.create_user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "buggativeyron",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "fullname",
+							"value": "Buggati Veyron",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "buggativeyron@gmail.com",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "buggativeyron123",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "user_status",
+							"value": "1",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/bank_users/create_user/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"bank_users",
+						"create_user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "bank_users.get_users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8000/bank_users/get_users/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"bank_users",
+						"get_users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "bank_accounts.create_account",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "branch_code",
+							"value": "ICICI00031",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "4",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "initial_amount",
+							"value": "5000",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/bank_accounts/create_account/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"bank_accounts",
+						"create_account",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "bank_accounts.get_bank_accounts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "branch_code",
+							"value": "ICICI00032",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "1",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "initial_amount",
+							"value": "5000000",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/bank_accounts/get_bank_accounts/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"bank_accounts",
+						"get_bank_accounts",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "bank_users.add_beneficiary",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "kmathe",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "beneficiary_name",
+							"value": "pagani zonda",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "beneficiary_account_no",
+							"value": "5",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "beneficiary_nickname",
+							"value": "pzonda01",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/bank_users/add_beneficiary/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"bank_users",
+						"add_beneficiary",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "bank_users.delete_beneficiary",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "beneficiary_id",
+							"value": "2",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/bank_users/delete_beneficiary/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"bank_users",
+						"delete_beneficiary",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "bank_transactions.fund_transfer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "beneficiary_account_no",
+							"value": "2",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "amount",
+							"value": "2000",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "transaction_info",
+							"value": "withdraw by self",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "account_no",
+							"value": "3",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/bank_transactions/fund_transfer/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"bank_transactions",
+						"fund_transfer",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "bank_accounts.get_future_balance",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "branch_code",
+							"value": "ICICI00032",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "1",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "initial_amount",
+							"value": "5000000",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/bank_accounts/get_future_balance/2/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"bank_accounts",
+						"get_future_balance",
+						"2",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "bank_accounts.delete_account",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "account_no",
+							"value": "8",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/bank_accounts/delete_account/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"bank_accounts",
+						"delete_account",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
