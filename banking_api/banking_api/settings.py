@@ -41,7 +41,7 @@ db = connection.cognitive_scale
 dbconf = db.dbconfiguration
 
 conf_params = dbconf.find_one({'PK':1})
-
+test_params = dbconf.find_one({'PK':2})
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
@@ -161,7 +161,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-
+HOST = "http://localhost:8000"
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 

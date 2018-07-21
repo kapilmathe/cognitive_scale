@@ -36,6 +36,28 @@ def create_user(request):
             return Response(out, status.HTTP_400_BAD_REQUEST)
 
 
+
+@api_view(['POST'])
+def delete_user(request):
+    out = {'success': True, 'user_id': None}
+    user_id = request.data.get('user_id')
+    user = Users.objects.filter(user_id = user_id)
+    try:
+        if user:
+            out['user_id'] = user_id
+            user.delete()
+            return Response(out, status.HTTP_202_ACCEPTED)
+        else:
+            out['success'] = False
+            return Response(out, status.HTTP_400_BAD_REQUEST)
+
+    except Exception as err:
+        logger.error("failed to delete user:{0}".format(err))
+        out['success'] = False
+        return Response(out, status.HTTP_503_SERVICE_UNAVAILABLE)
+
+
+
 @api_view(['GET'])
 def get_user_list(request):
     out = {'success': True  ,'data': None}
@@ -80,6 +102,7 @@ def add_beneficiary(request):
                     is_guest=True
                 )
                 beneficiary.save()
+                out['data'] = beneficiary.id
                 return Response(out, status.HTTP_201_CREATED)
             else:
                 out['success']=False

@@ -56,6 +56,7 @@ def deposit(request):
     except Exception as err:
         out['success'] = False
         logger.error("failed to deposit:{0}".format(err))
+        # out['message'] = err
         tx.move_to_history()
         tx.delete()
         return Response(out, status.HTTP_400_BAD_REQUEST)
@@ -108,6 +109,7 @@ def withdraw(request):
     except Exception as err:
         out['success'] = False
         logger.error("failed to withdraw:{0}".format(err))
+        # out['message'] = err
         tx.move_to_history()
         tx.delete()
         return Response(out, status.HTTP_400_BAD_REQUEST)
@@ -147,7 +149,7 @@ def fund_transfer(request):
             logger.info(deposit.text, deposit.status_code)
             # print(deposit.text, deposit.status_code)
             if deposit.status_code == 201:
-                out['message'] = "fund transfferred successfullu"
+                out['message'] = "fund transfferred successfully"
                 return Response(out, status.HTTP_201_CREATED)
             else:
                 revert = 400
@@ -182,7 +184,6 @@ def transaction_summary(request):
 def schedule(request):
     out = {'success': True, 'message': None}
     try:
-
         return Response(out, status.HTTP_201_CREATED)
     except Exception as err:
         logger.error("failed to schedule:{0}".format(err))

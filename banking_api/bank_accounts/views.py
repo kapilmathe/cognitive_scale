@@ -36,6 +36,23 @@ def create_bank_account(request):
         out['success'] = False
         return Response(out, status.HTTP_422_UNPROCESSABLE_ENTITY)
 
+@api_view(['POST'])
+def delete_bank_account(request):
+    out = {'success': True, 'account_number': None}
+    account_no = request.data.get("account_no")
+    try:
+        account = BankAccounts.objects.get(account_no=account_no)
+        if account:
+            account.delete()
+            out['account_number'] = account.account_no
+            return Response(out, status.HTTP_202_ACCEPTED)
+        else:
+            raise Exception("account doesnot exists")
+    except Exception as err:
+        logger.error("failed to create account: {0}".format(err))
+        out['success'] = False
+        return Response(out, status.HTTP_422_UNPROCESSABLE_ENTITY)
+
 
 @api_view(['GET'])
 def get_bank_accounts(request):

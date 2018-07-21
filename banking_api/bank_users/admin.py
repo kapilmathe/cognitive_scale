@@ -10,5 +10,5 @@ class UsersAdmin(admin.ModelAdmin):
 
 @admin.register(UserBeneficiaries)
 class UserBeneficiariesAdmin(admin.ModelAdmin):
-    list_display = ["id", "user_id", "beneficiary_fullname", "beneficiary_account_no", "other_bank_id", "is_guest"]
+    list_display = ["id", "user_id", "beneficiary_fullname", "beneficiary_account_no", "other_bank_id", "nickname", "is_guest"]
     ordering = ["user_id", "is_guest"]

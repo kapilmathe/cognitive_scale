@@ -42,6 +42,9 @@ class UserBeneficiaries(models.Model):
     other_bank_id = models.ForeignKey('bank_accounts.OtherBanks', on_delete=models.CASCADE, null=True)
     is_guest = models.BooleanField()
 
+    class Meta:
+        verbose_name_plural = "User Beneficiaries"
+
 
 class UserBeneficiariesSerializer(serializers.ModelSerializer):
     class Meta:
